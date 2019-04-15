@@ -14,7 +14,7 @@ import org.koin.android.ext.android.inject
 
 class HomeActivity : AppCompatActivity(), DetailView {
 
-    private val presenter: DetailPresenter by inject()
+    private val presenter: HomePresenter by inject()
     private lateinit var homeAdapter: HomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,6 @@ class HomeActivity : AppCompatActivity(), DetailView {
         setContentView(R.layout.home_activity)
         presenter.getGenresAndUpcomingMovies()
     }
-
 
     override fun loadUpcomingMovies (listMoviesWithGenre : MutableList<Movie>) {
         if (recyclerViewMovies.adapter==null) {

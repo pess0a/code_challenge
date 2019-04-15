@@ -6,6 +6,5 @@ import com.arctouch.codechallenge.model.UpcomingMoviesResponse
 
 
 interface DetailView : View {
-    fun loadUpcomingMovies (listMoviesWithGenre : MutableList<Movie>)
-    fun errorOnLoadUpcomingList()
+
 }

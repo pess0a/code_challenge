@@ -1,56 +1,23 @@
-package com.arctouch.codechallenge.presentation.home
+package com.arctouch.codechallenge.presentation.detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.arctouch.codechallenge.R
-import com.arctouch.codechallenge.model.Movie
-import com.arctouch.codechallenge.util.EndlessRecyclerViewScrollListener
+import com.arctouch.codechallenge.presentation.home.DetailPresenter
+import com.arctouch.codechallenge.presentation.home.DetailView
 import kotlinx.android.synthetic.main.home_activity.*
 import org.koin.android.ext.android.inject
 
 class DetailActivity : AppCompatActivity(), DetailView {
 
     private val presenter: DetailPresenter by inject()
-    private lateinit var homeAdapter: HomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
-        presenter.getGenresAndUpcomingMovies()
     }
 
-
-    override fun loadUpcomingMovies (listMoviesWithGenre : MutableList<Movie>) {
-        if (recyclerViewMovies.adapter==null) {
-            recyclerViewMovies.adapter = HomeAdapter(listMoviesWithGenre).apply { homeAdapter = this }
-            homeAdapter.setMovieClickItemListener {
-                startActivity(Intent(this@DetailActivity, NewsListActivity::class.java).apply {
-                    putExtra("newsId", it)
-                })
-            }
-
-
-            val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-            recyclerViewMovies.layoutManager = layoutManager
-
-            recyclerViewMovies.addOnScrollListener(object : EndlessRecyclerViewScrollListener(layoutManager) {
-                override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                    presenter.getUpcomingMovies()
-                }
-            })
-        } else {
-            (recyclerViewMovies.adapter as HomeAdapter).updateList(listMoviesWithGenre)
-        }
-
-
-    }
-
-    override fun errorOnLoadUpcomingList() {
-
-    }
 
     override fun showLoading() {
         progressBar.visibility = View.VISIBLE
