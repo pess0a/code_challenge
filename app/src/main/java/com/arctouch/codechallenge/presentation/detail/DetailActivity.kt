@@ -2,7 +2,6 @@ package com.arctouch.codechallenge.presentation.detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.model.Movie
@@ -13,7 +12,6 @@ import com.arctouch.codechallenge.util.TextUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.default_activity.*
-import kotlinx.android.synthetic.main.home_activity.*
 import org.koin.android.ext.android.inject
 
 class DetailActivity : AppCompatActivity(), DetailView {
