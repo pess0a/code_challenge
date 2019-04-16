@@ -48,10 +48,6 @@ class HomeActivity : AppCompatActivity(), HomeView {
 
     }
 
-    override fun errorOnLoadUpcomingList() {
-
-    }
-
     override fun showLoading() {
         progressBar.visibility = View.VISIBLE
     }

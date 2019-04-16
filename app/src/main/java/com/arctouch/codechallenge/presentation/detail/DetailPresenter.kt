@@ -18,7 +18,7 @@ class DetailPresenter(private var tmdbRepository: TmdbRepository) : BasePresente
                     view?.hideLoading()
 
                 }, {
-                    error ->
+                    error -> error.printStackTrace()
                 })
     }
 }
