@@ -8,11 +8,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.model.Movie
+import com.arctouch.codechallenge.presentation.detail.DetailActivity
 import com.arctouch.codechallenge.util.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.home_activity.*
 import org.koin.android.ext.android.inject
 
-class HomeActivity : AppCompatActivity(), DetailView {
+class HomeActivity : AppCompatActivity(), HomeView {
 
     private val presenter: HomePresenter by inject()
     private lateinit var homeAdapter: HomeAdapter

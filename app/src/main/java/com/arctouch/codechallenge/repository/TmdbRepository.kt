@@ -27,7 +27,7 @@ class TmdbRepository(private val tmdbApi: TmdbApi) {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getMovieById(id: Long): Observable<Movie> {
+    fun getMovieById(id: Int): Observable<Movie> {
         return tmdbApi.movie(id,TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

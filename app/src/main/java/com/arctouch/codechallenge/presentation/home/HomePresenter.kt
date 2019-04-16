@@ -4,7 +4,7 @@ import com.arctouch.codechallenge.base.BasePresenter
 import com.arctouch.codechallenge.data.Cache
 import com.arctouch.codechallenge.repository.TmdbRepository
 
-class HomePresenter(private var tmdbRepository: TmdbRepository) : BasePresenter<DetailView>() {
+class HomePresenter(private var tmdbRepository: TmdbRepository) : BasePresenter<HomeView>() {
 
     private var page : Long = 1
 

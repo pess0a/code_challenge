@@ -1,5 +1,6 @@
 package com.arctouch.codechallenge.presentation.home
 
+import android.util.Log
 import com.arctouch.codechallenge.base.BasePresenter
 import com.arctouch.codechallenge.data.Cache
 import com.arctouch.codechallenge.repository.TmdbRepository
@@ -8,10 +9,13 @@ class DetailPresenter(private var tmdbRepository: TmdbRepository) : BasePresente
 
     private var page : Long = 1
 
-    fun getMovieById(id: Long) {
+    fun getMovieById(id: Int) {
+        view?.showLoading()
         tmdbRepository.getMovieById(id)
                 .subscribe({
-                    response ->
+                    response -> Log.i("logger",response.toString())
+                    view?.loadMovieById(response)
+                    view?.hideLoading()
 
                 }, {
                     error ->

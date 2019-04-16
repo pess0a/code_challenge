@@ -6,5 +6,5 @@ import com.arctouch.codechallenge.model.UpcomingMoviesResponse
 
 
 interface DetailView : View {
-
+    fun loadMovieById(movie: Movie)
 }
