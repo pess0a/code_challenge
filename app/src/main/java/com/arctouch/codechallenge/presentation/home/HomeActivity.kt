@@ -67,14 +67,12 @@ class HomeActivity : AppCompatActivity(), HomeView {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                Log.i("logger",query)
-                homeAdapter.filter.filter(query)
+                //not implemented
                 return false
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                homeAdapter.filter.filter(query)
-                Log.i("logger",query)
+                //not implemented
                 return false
             }
         })
