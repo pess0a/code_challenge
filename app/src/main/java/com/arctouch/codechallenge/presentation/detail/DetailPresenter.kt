@@ -11,7 +11,7 @@ class DetailPresenter(private var tmdbRepository: TmdbRepository) : BasePresente
 
     fun getMovieById(id: Int) {
         view?.showLoading()
-        tmdbRepository.getMovieById(id)
+        val getMovieById = tmdbRepository.getMovieById(id)
                 .subscribe({
                     response -> Log.i("logger",response.toString())
                     view?.loadMovieById(response)
@@ -20,5 +20,10 @@ class DetailPresenter(private var tmdbRepository: TmdbRepository) : BasePresente
                 }, {
                     error -> error.printStackTrace()
                 })
+        disposableManager.add(getMovieById)
+    }
+
+    fun onDestroy() {
+        disposableManager.dispose()
     }
 }

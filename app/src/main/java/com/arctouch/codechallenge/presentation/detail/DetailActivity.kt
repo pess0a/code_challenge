@@ -58,4 +58,9 @@ class DetailActivity : AppCompatActivity(), DetailView {
         presenter.unBind()
         super.onStop()
     }
+
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
 }

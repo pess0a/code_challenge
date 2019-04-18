@@ -1,9 +1,7 @@
 import com.arctouch.codechallenge.TestSetupPlugin
-import com.arctouch.codechallenge.model.Genre
 import com.arctouch.codechallenge.model.GenreResponse
 import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.model.UpcomingMoviesResponse
-import com.arctouch.codechallenge.presentation.home.DetailPresenter
 import com.arctouch.codechallenge.repository.TmdbRepository
 import io.reactivex.Observable
 import io.reactivex.observers.TestObserver

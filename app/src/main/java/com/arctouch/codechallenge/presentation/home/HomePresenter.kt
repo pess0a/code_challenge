@@ -8,7 +8,6 @@ import com.arctouch.codechallenge.repository.TmdbRepository
 class HomePresenter(private var tmdbRepository: TmdbRepository) : BasePresenter<HomeView>() {
 
     private var page : Long = 1
-    private val disposableManager = DisposableManager()
 
     fun getGenresAndUpcomingMovies() {
         val getGenres = tmdbRepository.getGenres()
