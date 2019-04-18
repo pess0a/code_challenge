@@ -6,11 +6,8 @@ import android.view.View
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.presentation.home.DetailPresenter
-import com.arctouch.codechallenge.presentation.home.DetailView
-import com.arctouch.codechallenge.util.MovieImageUrlBuilder
+import com.arctouch.codechallenge.util.ViewUtil
 import com.arctouch.codechallenge.util.TextUtils
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.default_activity.*
 import org.koin.android.ext.android.inject
 
@@ -33,22 +30,13 @@ class DetailActivity : AppCompatActivity(), DetailView {
     }
 
     override fun loadMovieById(movie: Movie) {
-        val movieImageUrlBuilder = MovieImageUrlBuilder()
 
         textViewMovieName.text = movie.title
         textViewMovieGenres.text = TextUtils.organizeGenres(movie.genres)
         textViewOverview.text = movie.overview
         textViewMovieDate.text = movie.releaseDate
-
-        Glide.with(this)
-                .load(movie.posterPath?.let { movieImageUrlBuilder.buildPosterUrl(movie.backdropPath!!) })
-                .apply(RequestOptions().placeholder(R.drawable.ic_image_placeholder))
-                .into(imageViewBackdrop)
-
-        Glide.with(this)
-                .load(movie.posterPath?.let { movieImageUrlBuilder.buildPosterUrl(movie.posterPath!!) })
-                .apply(RequestOptions().placeholder(R.drawable.ic_image_placeholder))
-                .into(posterImageView)
+        ViewUtil.showBackdrop(imageViewPoster,movie.posterPath,imageViewPoster)
+        ViewUtil.showPoster(imageViewPoster,movie.backdropPath,imageViewBackdrop)
 
         scrollViewContent.visibility = View.VISIBLE
     }

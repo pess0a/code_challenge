@@ -4,20 +4,19 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.model.Movie
-import com.arctouch.codechallenge.util.MovieImageUrlBuilder
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.arctouch.codechallenge.util.ViewUtil
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class HomeAdapter(private val movies: MutableList<Movie>) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(private val movies: MutableList<Movie>) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(), Filterable {
 
     lateinit var listener: OnMovieClickItemListener
+    private var movieList: List<Movie>? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private val movieImageUrlBuilder = MovieImageUrlBuilder()
 
         fun bind(movie: Movie) {
             itemView.titleTextView.text = movie.title
@@ -25,10 +24,7 @@ class HomeAdapter(private val movies: MutableList<Movie>) : RecyclerView.Adapter
             itemView.releaseDateTextView.text = movie.releaseDate
             itemView.setOnClickListener { listener.onClick(movie.id) }
 
-            Glide.with(itemView)
-                    .load(movie.posterPath?.let { movieImageUrlBuilder.buildPosterUrl(it) })
-                    .apply(RequestOptions().placeholder(R.drawable.ic_image_placeholder))
-                    .into(itemView.posterImageView)
+            ViewUtil.showPoster(itemView,movie.posterPath,itemView.imageViewPoster)
         }
     }
 
@@ -53,6 +49,32 @@ class HomeAdapter(private val movies: MutableList<Movie>) : RecyclerView.Adapter
     inline fun setMovieClickItemListener(crossinline listener: (Int) -> Unit) {
         this.listener = object : OnMovieClickItemListener {
             override fun onClick(id: Int) = listener(id)
+        }
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val charString = charSequence.toString()
+                if (charString.isEmpty()) {
+                    movieList = movies
+                } else {
+                    val filteredList = ArrayList<Movie>()
+                    for (row in movies) {
+                        if (row.title!!.toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row)
+                        }
+                    }
+                    movieList = filteredList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = movieList
+                return filterResults
+            }
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+                movieList = filterResults.values as ArrayList<Movie>
+                notifyDataSetChanged()
+            }
         }
     }
 }

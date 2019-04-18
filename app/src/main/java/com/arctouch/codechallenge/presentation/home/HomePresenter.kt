@@ -2,14 +2,16 @@ package com.arctouch.codechallenge.presentation.home
 
 import com.arctouch.codechallenge.base.BasePresenter
 import com.arctouch.codechallenge.data.Cache
+import com.arctouch.codechallenge.infrastructure.DisposableManager
 import com.arctouch.codechallenge.repository.TmdbRepository
 
 class HomePresenter(private var tmdbRepository: TmdbRepository) : BasePresenter<HomeView>() {
 
     private var page : Long = 1
+    private val disposableManager = DisposableManager()
 
     fun getGenresAndUpcomingMovies() {
-        tmdbRepository.getGenres()
+        val getGenres = tmdbRepository.getGenres()
                 .doOnComplete {
                     getUpcomingMovies()
                 }
@@ -18,10 +20,12 @@ class HomePresenter(private var tmdbRepository: TmdbRepository) : BasePresenter<
                 }, { error ->
                     error.printStackTrace()
                 })
+
+        disposableManager.add(getGenres)
     }
 
     fun getUpcomingMovies() {
-        tmdbRepository.getUpcomingMovie(page).subscribe(
+        val getUpcomingMovie = tmdbRepository.getUpcomingMovie(page).subscribe(
                 { response ->
                     val moviesWithGenres = response.results.map { movie ->
                         movie.copy(genres = Cache.genres.filter {
@@ -35,5 +39,11 @@ class HomePresenter(private var tmdbRepository: TmdbRepository) : BasePresenter<
                 }, { error ->
                     error.printStackTrace()
                 })
+
+        disposableManager.add(getUpcomingMovie)
+    }
+
+    fun onDestroy() {
+        disposableManager.dispose()
     }
 }

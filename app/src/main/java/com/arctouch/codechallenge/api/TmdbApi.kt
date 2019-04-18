@@ -19,16 +19,14 @@ interface TmdbApi {
 
     @GET("genre/movie/list")
     fun genres(
-        @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): Observable<GenreResponse>
 
     // REMOVING DEFAULT REGION FROM REQUEST BECAUSE WAS RETURNING ONLY 12 RESULTS
-    // MAKING IMPOSSIBLE TO TET INIFITY SCROLL
+    // MAKING IMPOSSIBLE TO TEST INIFITY SCROLL
 
     @GET("movie/upcoming")
     fun upcomingMovies(
-        @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Long
     ): Observable<UpcomingMoviesResponse>
@@ -36,7 +34,6 @@ interface TmdbApi {
     @GET("movie/{id}")
     fun movie(
         @Path("id") id: Int,
-        @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): Observable<Movie>
 }
