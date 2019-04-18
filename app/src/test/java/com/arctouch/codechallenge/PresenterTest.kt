@@ -1,47 +1,27 @@
-import com.arctouch.codechallenge.TestSetupPlugin
-import com.arctouch.codechallenge.api.TmdbApi
-import com.arctouch.codechallenge.infrastructure.BackendIntegrator
-import com.arctouch.codechallenge.model.Movie
-import com.arctouch.codechallenge.presentation.home.DetailPresenter
+package com.arctouch.codechallenge
+
 import com.arctouch.codechallenge.presentation.home.HomePresenter
 import com.arctouch.codechallenge.repository.TmdbRepository
-import io.reactivex.Observable
-import io.reactivex.observers.TestObserver
 import org.junit.Before
-import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
 
-class PresenterTest : TestSetupPlugin(){
+class PresenterTest : TestSetupPlugin() {
 
-//  private lateinit var tmdbRepository: TmdbRepository
-var tmdbRepository: TmdbRepository = Mockito.mock(TmdbRepository::class.java)
-  private lateinit var detailPresenter: DetailPresenter
+    @Mock
+    lateinit var homePresenter: HomePresenter
 
-  @Before
-  fun setUp() {
+    @Mock
+    lateinit var tmdbRepository: TmdbRepository
 
-    //tmdbRepository = TmdbRepository(BackendIntegrator.getTmdbApi())
-    detailPresenter = DetailPresenter(tmdbRepository)
-  }
+    @Before
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+    }
 
-  @Test
-  fun testGetMovie() {
-    val movie = Mockito.mock(Movie::class.java)
+    fun testHomePresenter() {
 
-    `when`(tmdbRepository.getMovieById(1)).thenReturn(Observable.just(movie))
-    val testObserver = TestObserver<Movie>()
-    tmdbRepository.getMovieById(1).subscribe(testObserver)
-
-    verify(tmdbRepository).getMovieById(1)
-
-
-
-  }
-
-
-
+    }
 
 }

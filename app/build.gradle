@@ -47,8 +47,8 @@ dependencies {
     implementation "org.koin:koin-android:1.0.1"
 
     testImplementation 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-inline:+"
-    androidTestCompile "org.mockito:mockito-android:+"
+    testCompile "org.mockito:mockito-inline:2.21.0"
+    androidTestCompile "org.mockito:mockito-android:2.27.0"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
