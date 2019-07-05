@@ -18,7 +18,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/posterImageView"
+            android:id="@+id/imageViewPoster"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_toEndOf="@id/posterImageView"
+            android:layout_toEndOf="@id/imageViewPoster"
             android:ellipsize="end"
             android:maxLines="2"
             android:textSize="16sp"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTextView"
             android:layout_marginStart="8dp"
-            android:layout_toEndOf="@id/posterImageView"
+            android:layout_toEndOf="@id/imageViewPoster"
             android:ellipsize="end"
             android:maxLines="2"
             android:textSize="14sp"
@@ -58,7 +58,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_toEndOf="@id/posterImageView"
+            android:layout_toEndOf="@id/imageViewPoster"
             android:textSize="12sp"
             android:textStyle="italic"
             tools:text="19/12/1997" />
